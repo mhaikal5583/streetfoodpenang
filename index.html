@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Food Nation | Street Shar - Malaysia's Best Street Food</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* TASK 1 f): Adjusted Padding for Fixed Navbar */
+        .section-padding {
+            padding: 90px 0 60px 0; /* Ensures content doesn't hide behind the fixed navbar */
+        }
+        
+        /* TASK 1: Navigation Bar Styling (Fixed-top, background color, font theme) */
+        .navbar {
+            background-color: #ffc107 !important; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand, .nav-link {
+            font-weight: bold;
+            color: #343a40 !important;
+        }
+        .nav-link:hover {
+            color: #e9590e !important; 
+        }
+
+        /* TASK 1: Carousel Banner Styling */
+        #home .carousel-item {
+            height: 90vh; 
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .carousel-caption {
+            bottom: 50%;
+            transform: translateY(50%);
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+        
+        /* FIX 1: Menu Card Alignment (Image Size and Button Placement) */
+        
+        /* Hide the original <img> tag, using fixed-height background image instead */
+        #menu img {
+            display: none; 
+        }
+        
+        .food-img-placeholder {
+            width: 100%;
+            height: 250px; /* FIXED HEIGHT for consistent image size */
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 8px 8px 0 0;
+            background-color: #cccccc; 
+        }
+
+        .card-body {
+            min-height: 160px; /* Minimum height for text area */
+            display: flex;
+            flex-direction: column; 
+        }
+        
+        .card-body a.btn {
+            margin-top: auto; /* Pushes the button to the bottom, ensuring alignment */
+        }
+
+        /* TASK 2 b) & NEW FIX: Apply Transition to Buttons and Cards */
+        /* Smooth transitions for buttons */
+        .btn-success, .btn-primary, .btn-secondary, .btn-warning, .btn-outline-secondary {
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Card Hover Effect */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Enhanced Hover for "View Details" (Green) */
+        .btn-success:hover {
+            background-color: #198754 !important; /* Slightly darker green */
+            border-color: #198754 !important;
+            transform: scale(1.05); /* Slight lift */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced Hover for "SUBMIT" (Primary/Blue) */
+        .btn-primary:hover {
+            background-color: #0056b3 !important; /* Slightly darker blue */
+            border-color: #0056b3 !important;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* TASK 4: Contact Section Styling */
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        #contact .map-placeholder {
+            height: 400px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden; 
+        }
+        
+        /* TASK 1 e): Footer Styling */
+        footer {
+            background-color: #343a40 !important; 
+            color: white;
+            padding: 20px 0; 
+        }
+        .copyright-text {
+            text-align: center; 
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="56">
+
+    <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Street Shar</a> 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menu">Street Food Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reviews">Customer Review</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="section-padding pt-5">
+        <div class="container-fluid p-0">
+            <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="background-image: url('https://jeffvonderschmidt.com/wp-content/uploads/2016/02/image12.jpg');">
+                        <div class="carousel-caption">
+                            <h1 class="display-3 fw-bold">Welcome to Street Shar</h1>
+                            <p class="lead d-none d-sm-block">Discover the heart of Malaysia through its food a melting pot of flavours, aromas, and traditions passed down through generations.</p>
+                            <a href="#menu" class="btn btn-warning btn-lg">Start Your Food Adventure</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('https://cdn.tatlerasia.com/tatlerasia/i/2024/03/09115141-untitled-design-58_cover_1182x666.jpg');">
+                        <div class="carousel-caption">
+                            <h1 class="display-3 fw-bold">Craving Nasi Lemak?</h1>
+                            <p class="lead d-none d-sm-block">Whether you’re hunting for the perfect Char Kuey Teow, craving spicy Nasi Lemak, or discovering new flavours for the first time, Street Shar brings Malaysia’s culinary culture right to your fingertips.</p>
+                            <a href="#contact" class="btn btn-warning btn-lg">Connect With Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container mt-5">
+                <div class="row text-center">
+                    <div class="col-lg-10 mx-auto">
+                        <p class="text-muted fs-5">Street Shar connects you to the most-loved hawker stalls and hidden gems across the country, from the bustling night markets of Penang to the vibrant food streets of Johor Bahru.</p>
+                        <p class="text-muted fs-5">Explore mouth-watering menus, read honest reviews from fellow food lovers, and find your next food adventure with our interactive food map.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="menu" class="section-padding bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold text-dark">Taste the Streets of Malaysia</h2>
+                    <p class="lead">Each street, each corner, and every hawker stall has a story to tell. Discover authentic flavours that bring Malaysians together, one plate at a time.</p>
+                    <p>Browse our menu of iconic dishes and start your street food journey now.</p>
+                </div>
+            </div>
+            
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="food-img-placeholder" style="background-image: url('https://images.deliveryhero.io/image/fd-my/products/1432481690.jpg?width=%s');"></div>
+                        <img src="https://images.deliveryhero.io/image/fd-my/products/1432481690.jpg?width=%s" alt="Char Kuey Teow" style="display:none;"> 
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Char Kuey Teow</h5> 
+                            <p class="card-text text-muted">Smoky flat rice noodles stir-fried with shrimp, cockles, egg, and chili paste.</p>
+                            <a href="javascript:void(0)" onclick="viewFoodDetails('Char Kuey Teow')" class="btn btn-success btn-sm">View Details</a> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                         <div class="food-img-placeholder" style="background-image: url('https://www.maggi.my/sites/default/files/srh_recipes/82bbf23120c53051fd84185ea9c27da9.jpg');"></div>
+                        <img src="https://www.maggi.my/sites/default/files/srh_recipes/82bbf23120c53051fd84185ea9c27da9.jpg" alt="Nasi Lemak" style="display:none;">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Nasi Lemak</h5>
+                            <p class="card-text text-muted">Fragrant coconut rice served with spicy sambal, fried anchovies, peanuts, and half an egg.</p>
+                            <a href="javascript:void(0)" onclick="viewFoodDetails('Nasi Lemak')" class="btn btn-success btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="food-img-placeholder" style="background-image: url('https://images.getrecipekit.com/20250320035922-chicken-20satay.jpg?aspect_ratio=4:3&quality=90&');"></div>
+                        <img src="https://images.getrecipekit.com/20250320035922-chicken-20satay.jpg?aspect_ratio=4:3&quality=90&" alt="Satay" style="display:none;">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Satay</h5>
+                            <p class="card-text text-muted">Marinated meat skewers (chicken/beef) grilled over charcoal, served with a rich peanut sauce.</p>
+                            <a href="javascript:void(0)" onclick="viewFoodDetails('Satay')" class="btn btn-success btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="food-img-placeholder" style="background-image: url('https://www.elmundoeats.com/wp-content/uploads/2024/03/Penang-asam-laksa-in-a-bowl.jpg');"></div>
+                        <img src="https://www.elmundoeats.com/wp-content/uploads/2024/03/Penang-asam-laksa-in-a-bowl.jpg" alt="Assam Laksa" style="display:none;">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Assam Laksa</h5>
+                            <p class="card-text text-muted">A tangy, spicy fish-based soup with thick rice noodles, a Penang specialty.</p>
+                            <a href="javascript:void(0)" onclick="viewFoodDetails('Assam Laksa')" class="btn btn-success btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="food-img-placeholder" style="background-image: url('https://www.theflavorbender.com/wp-content/uploads/2021/09/Roti-Canai-6501-2.jpg');"></div>
+                        <img src="https://www.theflavorbender.com/wp-content/uploads/2021/09/Roti-Canai-6501-2.jpg" alt="Roti Canai" style="display:none;">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Roti Canai</h5>
+                            <p class="card-text text-muted">Flaky pan-fried flatbread, a classic breakfast dish served with dhal or curry.</p>
+                            <a href="javascript:void(0)" onclick="viewFoodDetails('Roti Canai')" class="btn btn-success btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="food-img-placeholder" style="background-image: url('https://sm.mashable.com/t/mashable_sea/photo/default/cendolheader_6vzc.1248.jpg');"></div>
+                        <img src="https://sm.mashable.com/t/mashable_sea/photo/default/cendolheader_6vzc.1248.jpg" alt="Cendol" style="display:none;">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Cendol</h5>
+                            <p class="card-text text-muted">A sweet, icy dessert with coconut milk, pandan jelly, and brown sugar (Gula Melaka).</p>
+                            <a href="javascript:void(0)" onclick="viewFoodDetails('Cendol')" class="btn btn-success btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="reviews" class="section-padding">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold text-dark">Share Your Street Food Experience</h2>
+                    <p class="lead">Your opinion matters! Tell us about your favorite street food stalls what makes their dishes unforgettable?</p>
+                    <p>From the aroma of grilled satay to the sweetness of a refreshing cendol, every review helps other food lovers discover Malaysia’s best hidden gems.</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form id="reviewForm" class="p-4 border rounded shadow-sm needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="reviewName" class="form-label fw-bold">Full Name:</label>
+                            <input type="text" class="form-control" id="reviewName" name="reviewName" placeholder="Enter your full name" required>
+                            <div class="invalid-feedback">Please enter your full name.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewEmail" class="form-label fw-bold">Email Address:</label>
+                            <input type="email" class="form-control" id="reviewEmail" name="reviewEmail" placeholder="Enter your email address" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewStall" class="form-label fw-bold">Food Name / Stall:</label>
+                            <input type="text" class="form-control" id="reviewStall" name="reviewStall" placeholder="e.g., Penang Char Kuey Teow Stall" required>
+                            <div class="invalid-feedback">Please enter the food name or stall.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewRating" class="form-label fw-bold">Star Rating (1-5):</label>
+                            <select class="form-select" id="reviewRating" name="reviewRating" required>
+                                <option value="" disabled selected>Select a rating (1 to 5)</option>
+                                <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+                                <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+                                <option value="3">⭐⭐⭐ 3 Stars</option>
+                                <option value="2">⭐⭐ 2 Stars</option>
+                                <option value="1">⭐ 1 Star</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a rating.</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="reviewComment" class="form-label fw-bold">Comment box:</label>
+                            <textarea class="form-control" id="reviewComment" name="reviewComment" rows="4" placeholder="Share your unforgettable experience here..." required></textarea>
+                            <div class="invalid-feedback">Please enter your comment.</div>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="submit" class="btn btn-primary me-md-2">SUBMIT</button>
+                            <button type="reset" class="btn btn-outline-secondary">RESET</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="contact" class="section-padding bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold text-dark">Contact Us</h2>
+                    <p class="lead">Reach out to us anytime, and our friendly team will be happy to provide you with the information or support you need.</p>
+                    <p>Your satisfaction is our priority at Street Shar</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7 mb-4">
+                    <h4 class="mb-3">Find Us Here (Google Maps)</h4>
+                    <div class="map-placeholder shadow-lg">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127119.15202558531!2d100.15257207526216!3d5.344454961405761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304ac396b6979b77%3A0x7a294ae9e80e93c9!2sKimberley%20Street%20Food%20Night%20Market!5e0!3m2!1sen!2smy!4v1763437049946!5m2!1sen!2smy" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <small class="text-muted">Location: 1, Jalan Sungai Ujong, George Town, 10100 George Town, Pulau Pinang (Famous Food Spot)</small>
+                </div>
+
+                <div class="col-md-5">
+                    <h4 class="mb-3">Contact Person</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <span class="fw-bold">Contact Person:</span> MUHAMMAD HAIKAL (21DIT24F1241)
+                        </li>
+                        <li class="mb-2">
+                           <span class="fw-bold">Address:</span> 1, Jalan Sungai Ujong, George Town, 10100 George Town, Pulau Pinang
+                        </li>
+                        <li class="mb-2">
+                            <span class="fw-bold">Contact Number:</span> 
+                            <a href="tel:+60197315583" class="+60 19-731 5583">
+                                <span class="contact-icon"></span> +60 19-731 5583
+                            </a>
+                        </li>
+                        <li class="mb-4">
+                            <span class="fw-bold">Email Address:</span> 
+                            <a href="mailto:haikal@streetshar.com" class="haikal@streetshar.com">
+                                <span class="contact-icon"></span> haikal@streetshar.com
+                            </a>
+                        </li>
+                        <li>
+                            <p class="text-muted"><small class="fw-bold">Current Date & Time:</small> <span id="currentDateTime" class="badge bg-secondary">Loading...</span></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-auto">
+        <div class="container">
+            <p class="mb-0 copyright-text">Copyright © <span id="currentYear"></span> Street Shar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalLabel">Food Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="fs-5 fw-bold" id="modalFoodName"></p>
+            <div id="dynamicFoodDetails">
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        
+        function viewFoodDetails(foodName) {
+            let detailsContent = '';
+
+            
+            switch (foodName) {
+                case 'Char Kuey Teow':
+                    detailsContent = `
+                        <p><strong>Origin:</strong> Penang, Malaysia.</p>
+                        <p><strong>Ingredients:</strong> Flat rice noodles, shrimp, cockles, chives, bean sprouts, and egg, all wok-fried over fierce heat for the signature 'wok hei' aroma. Often spicy!</p>
+                        <p class="text-info">Try it with duck egg for extra richness!</p>
+                    `;
+                    break;
+                case 'Nasi Lemak':
+                    detailsContent = `
+                        <p><strong>The National Dish:</strong> Fragrant rice cooked in coconut milk and pandan leaves.</p>
+                        <p><strong>Served with:</strong> Spicy sambal, hard-boiled egg, crispy fried anchovies (ikan bilis), and roasted peanuts. It's a complete meal at any time of day.</p>
+                    `;
+                    break;
+                case 'Satay':
+                    detailsContent = `
+                        <p><strong>Description:</strong> Succulent pieces of marinated chicken or beef skewered and grilled over charcoal.</p>
+                        <p><strong>The Sauce:</strong> Served with a rich, sweet, and spicy peanut sauce, sliced cucumbers, and raw onions.</p>
+                    `;
+                    break;
+                case 'Assam Laksa':
+                    detailsContent = `
+                        <p><strong>Flavour Profile:</strong> Sour (Assam means tamarind) and spicy, dominated by a fish-based broth (usually mackerel).</p>
+                        <p><strong>Toppings:</strong> Served with thick rice noodles, shredded pineapple, mint leaves, onion, and a dollop of prawn paste (hae ko).</p>
+                    `;
+                    break;
+                case 'Roti Canai':
+                    detailsContent = `
+                        <p><strong>Description:</strong> A fluffy, flaky flatbread prepared by tossing and folding dough, then pan-fried until crispy outside and soft inside.</p>
+                        <p><strong>Best served with:</strong> Dhal (lentil curry) or a chicken/fish curry dipping sauce.</p>
+                    `;
+                    break;
+                case 'Cendol':
+                    detailsContent = `
+                        <p><strong>A Classic Dessert:</strong> Shaved ice topped with bright green, pandan-flavored rice flour jelly (the cendol strings).</p>
+                        <p><strong>Sweeteners:</strong> Drizzled generously with rich coconut milk and dark palm sugar syrup (Gula Melaka). Perfect for a hot day!</p>
+                    `;
+                    break;
+                default:
+                    detailsContent = '<p class="text-danger">Details not found for this item.</p>';
+            }
+
+            
+            $('#modalFoodName').text("Viewing details for " + foodName);
+            
+            
+            $('#dynamicFoodDetails').html(detailsContent);
+
+            
+            const detailsModal = new bootstrap.Modal(document.getElementById('detailsModal'));
+            detailsModal.show();
+        }
+
+        $(document).ready(function() {
+            
+            
+            $('#detailsModal').on('hidden.bs.modal', function () {
+                
+                $('html, body').animate({
+                    scrollTop: $("#menu").offset().top - 80 
+                }, 800);
+            });
+
+            function updateDateTime() {
+                const now = new Date();
+                const options = { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit', 
+                    hour12: true 
+                };
+                const formattedDateTime = now.toLocaleString('en-US', options);
+                $('#currentDateTime').text(formattedDateTime);
+                $('#currentYear').text(now.getFullYear());
+            }
+            updateDateTime();
+            setInterval(updateDateTime, 1000); 
+
+            $('#reviewForm').on('submit', function(event) {
+                if (!this.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    event.preventDefault(); 
+                    let name = $('#reviewName').val();
+                    
+
+                    alert('Thank you, ' + name + ', for your review! Your feedback has been submitted successfully.');
+
+
+                    $('html, body').animate({
+                        scrollTop: $("#reviews").offset().top - 80 
+                    }, 800);
+                    
+
+                    $(this).trigger('reset');
+                    $(this).removeClass('was-validated');
+                }
+
+
+                $(this).addClass('was-validated');
+            });
+        });
+    </script>
+</body>
+</html>
